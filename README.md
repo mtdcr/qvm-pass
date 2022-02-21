@@ -33,11 +33,11 @@ Examples can be found in [`qubes-rpc/policy`](https://github.com/mtdcr/qvm-pass/
 
 ### Location: TemplateVM for pass-vault
 
-#### Install qrexec service for write operations
+#### 5. Install qrexec service for write operations
 
 `sudo install -m755 ~/QubesIncoming/*/qubes.PasswordStoreWrite /etc/qubes-rpc/`
 
-#### Create symlink for qrexec service for read operations
+#### 6. Create symlink for qrexec service for read operations
 
 `sudo ln -s qubes.PasswordStoreWrite /etc/qubes-rpc/qubes.PasswordStoreRead`
 
