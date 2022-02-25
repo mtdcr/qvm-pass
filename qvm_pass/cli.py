@@ -100,29 +100,31 @@ def pass_entry_point(name: t.Optional[str] = None, **attrs: t.Any) -> t.Callable
 
 
 def pass_rpc(dest: str, rpcname: str, argv: t.List[str], stdin=None) -> CompletedProcess:
-    data = {"a": argv}
+    input_data: t.Dict[str, t.Union[str, t.List[str]]] = {"a": argv}
     if stdin is not None:
-        data["i"] = base64.b64encode(stdin.encode("utf-8")).decode("ascii")
+        input_data["i"] = base64.b64encode(stdin.encode("utf-8")).decode("ascii")
 
     try:
-        output = qrexec.client.call(dest, rpcname, arg=argv[0], input=json.dumps(data))
+        output = qrexec.client.call(dest, rpcname, arg=argv[0], input=json.dumps(input_data))
     except Exception as exc:
         print(exc, file=sys.stderr)
         sys.exit(1)
 
     try:
-        data = json.loads(output)
+        output_data = json.loads(output)
     except json.decoder.JSONDecodeError as exc:
         sys.exit(exc)
 
-    p = CompletedProcess(data["a"], data["r"], base64.b64decode(data["o"]), base64.b64decode(data["e"]))
+    p = CompletedProcess(
+        output_data["a"], output_data["r"], base64.b64decode(output_data["o"]), base64.b64decode(output_data["e"])
+    )
     if p.args[1:] != argv:
         sys.exit("Unexpected reply")
 
     return p
 
 
-def pass_read(state: QvmPassState, cmd: str, args: t.Optional[t.List[str]] = []) -> CompletedProcess:
+def pass_read(state: QvmPassState, cmd: str, args: t.List[str] = []) -> CompletedProcess:
     return pass_rpc(
         state.qube,
         "qubes.PasswordStoreRead",
@@ -130,7 +132,7 @@ def pass_read(state: QvmPassState, cmd: str, args: t.Optional[t.List[str]] = [])
     )
 
 
-def pass_write(state: QvmPassState, cmd: str, args: t.Optional[t.List[str]] = [], stdin=None) -> CompletedProcess:
+def pass_write(state: QvmPassState, cmd: str, args: t.List[str] = [], stdin=None) -> CompletedProcess:
     return pass_rpc(
         state.qube,
         "qubes.PasswordStoreWrite",
