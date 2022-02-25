@@ -108,7 +108,7 @@ def pass_rpc(dest: str, rpcname: str, argv: t.List[str], stdin=None) -> Complete
         output = qrexec.client.call(dest, rpcname, arg=argv[0], input=json.dumps(data))
     except Exception as exc:
         print(exc, file=sys.stderr)
-        sys.exit(exc.returncode)
+        sys.exit(1)
 
     try:
         data = json.loads(output)
