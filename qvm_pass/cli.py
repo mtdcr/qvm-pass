@@ -41,8 +41,8 @@ import qrexec.client
 class CompletedProcess:
     args: t.List[str]
     returncode: int
-    stdout: str
-    stderr: str
+    stdout: bytes
+    stderr: bytes
 
     def print_and_quit(self):
         sys.stdout.buffer.write(self.stdout)
