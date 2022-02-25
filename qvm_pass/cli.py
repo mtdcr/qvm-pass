@@ -263,7 +263,7 @@ def show(state: QvmPassState, name: str, **kwargs):
 @click.argument("pass-name", required=True)
 @click.pass_obj
 def insert(state: QvmPassState, pass_name: str, echo: bool, multiline: bool, force: bool) -> None:
-    if not force and not confirm_overwrite(pass_name):
+    if not force and not confirm_overwrite(state, pass_name):
         sys.exit(1)
 
     options = "-f"
@@ -317,7 +317,7 @@ def generate(
     in_place: bool,
     force: bool,
 ) -> None:
-    if not in_place and not force and not confirm_overwrite(pass_name):
+    if not in_place and not force and not confirm_overwrite(state, pass_name):
         sys.exit(1)
 
     options = "-"
