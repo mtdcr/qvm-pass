@@ -241,7 +241,7 @@ def show(state: QvmPassState, name: str, **kwargs):
                     qrcode = True
                 newargs.append(arg)
 
-    if clip and not qrcode:
+    if clip and not qrcode and pass_name:
         p = pass_read(state, "show", newargs)
         idx = max(0, line_no - 1)
         lines = p.stdout.decode("utf-8").splitlines()
