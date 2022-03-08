@@ -205,7 +205,7 @@ def copy_to_clipboard(pass_name: str, password: str) -> None:
             copy(old, **kwargs)
 
 
-@pass_entry_point(invoke_without_command=True)
+@pass_entry_point(invoke_without_command=True, context_settings={"ignore_unknown_options": True})
 @click.pass_context
 def qvm_pass(ctx):
     state = QvmPassState()
