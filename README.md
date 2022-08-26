@@ -1,10 +1,10 @@
 # qvm-pass
 
-*qvm-pass* is a frontend for [pass](https://www.passwordstore.org/) running in a vault VM. In other words it is an implementation of *split-pass* in the spirit of [split-gpg](https://github.com/mtdcr/qubes-app-split-gpg) and [split-ssh](https://github.com/mtdcr/qubes-app-split-ssh). It uses the RPC interface of [Qubes](https://www.qubes-os.org/) called [qrexec](https://www.qubes-os.org/doc/qrexec/), which behaves roughly like a serial connection. Where the RPC interface limits interactivity, *qvm-pass* aims to mimic the same user interface as known from the original `pass` command. However, the `git` subcommand gets blocked, because it would allow the execution of dangerous operations.
+*qvm-pass* is a frontend for [pass](https://www.passwordstore.org/) running in a vault VM. It is an implementation of *split-pass* in the spirit of [split-gpg](https://github.com/mtdcr/qubes-app-split-gpg) and [split-ssh](https://github.com/mtdcr/qubes-app-split-ssh) using the [qrexec](https://www.qubes-os.org/doc/qrexec/) RPC interface of [Qubes OS](https://www.qubes-os.org/). *qvm-pass* aims to provide the same user interface as the original `pass` command. However, the `pass git` subcommand gets blocked to avoid execution of dangerous operations.
 
 Consider combining *qvm-pass* with [split-gpg](https://github.com/mtdcr/qubes-app-split-gpg).
 
-**This code was written in a very short time frame and hasn't had any peer review or testing. Use at your own risk!**
+**This code was written in a very short time frame and hasn't had any peer review. Use at your own risk!**
 
 ## Installation
 
