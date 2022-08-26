@@ -10,7 +10,7 @@ profile = "black"
 
 [tool.poetry]
 name = "qvm-pass"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 license = "MIT"
 authors = ["Andreas Oberritter <obi@saftware.de>"]
