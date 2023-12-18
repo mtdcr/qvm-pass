@@ -113,7 +113,7 @@ def pass_rpc(dest: str, rpcname: str, argv: t.List[str], stdin=None) -> Complete
     try:
         output_data = json.loads(output)
     except json.decoder.JSONDecodeError as exc:
-        sys.exit(exc)
+        sys.exit(str(exc))
 
     p = CompletedProcess(
         output_data["a"], output_data["r"], base64.b64decode(output_data["o"]), base64.b64decode(output_data["e"])
