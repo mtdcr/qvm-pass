@@ -91,7 +91,7 @@ class PassEntryPoint(click.Group):
         else:
             args = args[1:]
 
-        return cmd.name, cmd, args
+        return cmd.name if cmd else None, cmd, args
 
 
 def pass_entry_point(
