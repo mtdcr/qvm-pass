@@ -159,7 +159,7 @@ def pass_write_generic(state: QvmPassState, cmd: str, *args, stdin=None, **kwarg
 
 def register_command(name: str, callback) -> None:
     context_settings = {"ignore_unknown_options": True}
-    params = [click.Argument(("args",), nargs=-1, type=click.UNPROCESSED)]
+    params: t.List[click.Parameter] = [click.Argument(("args",), nargs=-1, type=click.UNPROCESSED)]
     cmd = click.Command(
         name,
         context_settings=context_settings,
