@@ -94,7 +94,9 @@ class PassEntryPoint(click.Group):
         return cmd.name, cmd, args
 
 
-def pass_entry_point(name: t.Optional[str] = None, **attrs: t.Any) -> t.Callable[[click.decorators.F], PassEntryPoint]:
+def pass_entry_point(
+    name: t.Optional[str] = None, **attrs: t.Any
+) -> t.Callable[[t.Callable[..., t.Any]], PassEntryPoint]:
     attrs.setdefault("cls", PassEntryPoint)
     return t.cast(PassEntryPoint, click.group(name, **attrs))
 
